@@ -1,0 +1,9 @@
+simulation_speed:100
+density:30
+show_stats:true
+auto_restart:true
+colorful:true
+stable:86,252,3
+growth:3,252,219
+dense:252,231,3
+sparce:252,3,3

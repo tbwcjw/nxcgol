@@ -1,0 +1,112 @@
+<p align="center">
+<img width="15%" src="assets/nx_cgol_logo.png">
+</p>
+    <h2 align="center">nxcgol</h2>
+<p align="center">An implementation of <a href='https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life'>Conway's Game of Life</a> for the Nintendo Switch </p>
+<p align="center">
+    <img src="https://github.com/tbwcjw/nxcgol/actions/workflows/c.yml/badge.svg?event=push"> 
+    <a href="https://tbwcjw.github.io/nxcgol/">
+        <img alt="Documentation" src="https://img.shields.io/badge/documentation-orange">
+    </a>
+</p>
+<hr>
+<p align="center">
+<img width="75%" src="assets/nx_cgol_animated.gif"><br>
+</p>
+<hr>
+<h4>Setup</h4>
+<ul>
+    <li>Unzip <code>[release].zip</code>, copy <code>switch/</code> to the root of your SD card.</li>
+    <li>Set <code>nxcgol.config.txt</code>, explained <a href='#config'>below</a>.
+    <li>Launch the application from HB menu.</li>
+</ul>
+<table id="config">
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Type</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>simulation_speed</code></td>
+            <td><code>int</code></td>
+            <td>Between <code>0</code> and <code>100</code> (percent).
+        </tr>
+        <tr>
+            <td><code>density</code></td>
+            <td><code>int</code></td>
+            <td>Between <code>0</code> and <code>100</code>.
+            <br>The amount of cells to spawn in a new colony.</td></td>
+        </tr>
+        <tr>
+            <td><code>show_stats</code></td>
+            <td><code>bool</code></td>
+            <td>Either <code>true</code> or <code>false</code>.<br>The last line of the console will display controls, the current generation and the current colony number.</td>
+        </tr>
+        <tr>
+            <td><code>auto_restart</code></td>
+            <td><code>bool</code></td>
+            <td>Either <code>true</code> or <code>false</code>.<br>Start a new colony when the current one has stagnated.</td>
+        </tr>
+        <tr>
+            <td><code>colorful</code></td>
+            <td><code>bool</code></td>
+            <td>Either <code>true</code> or <code>false</code>.<br>Use the colors, as below, to show the state of each cell.</td>
+        </tr>
+        <tr>
+            <td><code>stable</code></td>
+            <td><code>str</code><br><code><i>R,G,B</i></code></td>
+            <td>
+                <p>Stable cells/patterns</p>
+                Default: <code>86,252,3</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>growth</code></td>
+            <td><code>str</code><br><code><i>R,G,B</i></code></td>
+            <td>
+                <p>Patterns increase in size/complexity over time</p>
+                Default: <code>3,252,219</code>
+            </td>
+        </tr>
+        <tr>
+            <td><code>dense</code></td>
+            <td><code>str</code><br><code><i>R,G,B</i></code></td>
+            <td>
+                <p>Region/pattern with high concentration of live cells</p>
+                Default: <code>252,231,3</code>
+            </td>
+        </tr>
+         <tr>
+            <td><code>sparce</code></td>
+            <td><code>str</code><br><code><i>R,G,B</i></code></td>
+            <td>
+                <p>Region with few live cells</p>
+                Default: <code>252,3,3</code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<hr>
+<h4>Building</h4>
+<ul>
+    <li>Install <a href='https://devkitpro.org'>devkitpro</a> with <code>switch-dev</code>, <code>switch-curl</code> and <code>switch-zlib</code> using the <a href='https://devkitpro.org/wiki/Getting_Started'>Getting Started</a> guide. For building releases you will need <code>zip</code>.
+    <li>Clone <a href='https://github.com/tbwcjw/nxcgol.git'>https://github.com/tbwcjw/nxcgol.git</a>.
+    <li>Copy <code>nxcgol.sample.txt</code> to <code>nxcgol.config.txt</code> and fill in the fields<sup><a href='#config'>*</a></sup>.
+    <li>
+        <code>make (all)</code> - build the application and generate a release.
+        <br>
+        <code>make build</code> - build the application.
+        <br>
+        <code>make release</code> - builds and generate a release.
+        <br>
+        <code>make clean</code> - removes build/build data. does not remove releases
+    </li>
+    <li>Use NXLink to send <code>application.nro</code> and fptd to send the <code>nxcgol.config.txt</code>, ensuring it is in the same directory as <code>application.nro</code>.</li>
+</ul>
+<hr>
+<h4>Licenses</h4>
+<a href='https://www.gnu.org/licenses/gpl-3.0.en.html'><img src='https://camo.githubusercontent.com/7710eaa5373ee99658cc5c6e389bb88119903cbf92422f24c1e92cd957793e8c/68747470733a2f2f7777772e676e752e6f72672f67726170686963732f67706c76332d3132377835312e706e67'></a><br>
+nxgcol is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
