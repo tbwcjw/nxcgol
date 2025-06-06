@@ -355,9 +355,9 @@ int main(int argc, char** argv)
 
         }
         if (config.show_stats) {
-            printf(CONSOLE_ESC(45; 1H));     //move cursor
+            printf(CONSOLE_ESC(45;1H));     //move cursor
             printf(CONSOLE_ESC(2K));        //clear line
-            printf(CONSOLE_ESC(45; 1H) "[%c/%c] Speed: %3i%% | Generation: %i/%i | [-] New Colony [+] Exit", UP, DOWN, config.simulation_speed, restart_index, generation_index);
+            printf(CONSOLE_ESC(45;1H) CONTROLS_BLUE "[-] " RESET "New Colony" CONTROLS_BLUE " [%c/%c] " RESET "Change speed (%i%%)" CONTROLS_BLUE " [+] " RESET "Exit | Generation: %i/%i", UP, DOWN, config.simulation_speed, restart_index, generation_index);
         }
 
         usleep(simulation_speed);
