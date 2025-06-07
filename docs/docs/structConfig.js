@@ -8,5 +8,6 @@ var structConfig =
     [ "show_stats", "structConfig.html#a0e1f3c049a9ddcc3c17f61690f03ff8d", null ],
     [ "simulation_speed", "structConfig.html#a83ab46e15e565b451d3b23bbbebe4e3a", null ],
     [ "sparce", "structConfig.html#a4b32e3030c90a7bf62165c0f3d955960", null ],
-    [ "stable", "structConfig.html#ad016e77a02843ec638307f8df40a432a", null ]
+    [ "stable", "structConfig.html#ad016e77a02843ec638307f8df40a432a", null ],
+    [ "stagnant_wait", "structConfig.html#ae5abb5b01c4f3787e1c09a250ac32c25", null ]
 ];

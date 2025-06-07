@@ -26,5 +26,6 @@ var main_8c =
     [ "history_index", "group__config.html#ga8b65d598adaef25686754a7514b62891", null ],
     [ "matrix", "group__config.html#ga45a8803e3124c365aa1fff6eba64b8b3", null ],
     [ "matrix_next", "group__config.html#ga6fccb2265a1c05ee54185de63dd29faa", null ],
-    [ "restart_index", "group__config.html#gabdda70ba66b9e76855948f03d6f165df", null ]
+    [ "restart_index", "group__config.html#gabdda70ba66b9e76855948f03d6f165df", null ],
+    [ "stagnant_index", "group__config.html#ga4a195e157085a00f08b862cbf313ae03", null ]
 ];
