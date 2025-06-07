@@ -32,59 +32,70 @@
         <tr>
             <td><code>simulation_speed</code></td>
             <td><code>int</code></td>
-            <td>Between <code>0</code> and <code>100</code> (percent).
+            <td><p>Between <code>0</code> and <code>100</code> (percent).</p>
+            <i>Default: <code>80</code></i></td>
         </tr>
         <tr>
-            <td><code>density</code></td>
+            <td><code>starting_density</code></td>
             <td><code>int</code></td>
-            <td>Between <code>0</code> and <code>100</code>.
-            <br>The amount of cells to spawn in a new colony.</td></td>
+            <td><p>Between <code>0</code> and <code>100</code>.
+            <br>The amount of cells to spawn in a new colony.</p>
+            <i>Default: <code>100</code></i></td>
         </tr>
         <tr>
             <td><code>show_stats</code></td>
             <td><code>bool</code></td>
-            <td>Either <code>true</code> or <code>false</code>.<br>The last line of the console will display controls, the current generation and the current colony number.</td>
+            <td><p>Either <code>true</code> or <code>false</code>.<br>The last line of the console will display controls, the current generation and the current colony number.</p>
+            <i>Default: <code>true</code></i></td>
         </tr>
         <tr>
             <td><code>auto_restart</code></td>
             <td><code>bool</code></td>
-            <td>Either <code>true</code> or <code>false</code>.<br>Start a new colony when the current one has stagnated.</td>
+            <td><p>Either <code>true</code> or <code>false</code>.<br>Start a new colony when the current one has stagnated.</p>
+            <i>Default: <code>true</code></i></td>
+        </tr>
+        <tr>
+            <td><code>stagnant_wait</code></td>
+            <td><code>int</code></td>
+            <td><p>Between <code>1</code> and <code>1000</code>.<br>Wait this amount of generations to start a new colony after the current one has stagnated.</p>
+            <i>Default: <code>100</code></i></td>
         </tr>
         <tr>
             <td><code>colorful</code></td>
             <td><code>bool</code></td>
-            <td>Either <code>true</code> or <code>false</code>.<br>Use the colors, as below, to show the state of each cell.</td>
+            <td><p>Either <code>true</code> or <code>false</code>.<br>Use the colors, as below, to show the state of each cell, else, use black background and white cells.</p>
+            <i>Default: <code>true</code></i></td>
         </tr>
         <tr>
-            <td><code>stable</code></td>
+            <td><code>stable_color</code></td>
             <td><code>str</code><br><code><i>R,G,B</i></code></td>
             <td>
                 <p>Stable cells/patterns</p>
-                Default: <code>86,252,3</code>
+                <i>Default: <img style="vertical-align: middle;" src="https://img.shields.io/badge/86,252,3-56fc03" alt="86,252,3"></i>
             </td>
         </tr>
         <tr>
-            <td><code>growth</code></td>
+            <td><code>growth_color</code></td>
             <td><code>str</code><br><code><i>R,G,B</i></code></td>
             <td>
                 <p>Patterns increase in size/complexity over time</p>
-                Default: <code>3,252,219</code>
+                <i>Default: <img style="vertical-align: middle;" src="https://img.shields.io/badge/3,252,219-03fcdb" alt="3,252,219"></i>
             </td>
         </tr>
         <tr>
-            <td><code>dense</code></td>
+            <td><code>dense_color</code></td>
             <td><code>str</code><br><code><i>R,G,B</i></code></td>
             <td>
                 <p>Region/pattern with high concentration of live cells</p>
-                Default: <code>252,231,3</code>
+                Default: <img style="vertical-align: middle;" src="https://img.shields.io/badge/252,231,3-fce703" alt="252,231,3"></i>
             </td>
         </tr>
          <tr>
-            <td><code>sparce</code></td>
+            <td><code>sparce_color</code></td>
             <td><code>str</code><br><code><i>R,G,B</i></code></td>
             <td>
                 <p>Region with few live cells</p>
-                Default: <code>252,3,3</code>
+                <i>Default: <img style="vertical-align: middle;" src="https://img.shields.io/badge/252,3,3-fc0303"></i>
             </td>
         </tr>
     </tbody>

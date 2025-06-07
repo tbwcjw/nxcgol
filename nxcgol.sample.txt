@@ -1,9 +1,10 @@
-simulation_speed:100
-density:30
+simulation_speed:80
+starting_density:30
 show_stats:true
 auto_restart:true
+stagnant_wait:100
 colorful:true
-stable:86,252,3
-growth:3,252,219
-dense:252,231,3
-sparce:252,3,3
+stable_color:86,252,3
+growth_color:3,252,219
+dense_color:252,231,3
+sparce_color:252,3,3

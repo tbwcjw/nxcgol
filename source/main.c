@@ -10,7 +10,8 @@
 #define CONFIG_FILE "nxcgol.config.txt"     ///<config file
 #define ROWS 46                             ///<total rows
 #define COLS 81                             ///< t
-#define HISTORY_SIZE 8                      ///<retain x generations
+#define HISTORY_SIZE 8                      ///<retain x generations for comparison
+
 
 #define CELL 0xDB                           ///<solid block cp437
 #define UP   0x18                           ///<up arrow cp437
@@ -39,6 +40,7 @@ typedef struct {
     int density;                            ///<between 1 and 100
     bool show_stats;                        ///<last row statistics
     bool auto_restart;                      ///<restart on static
+    int stagnant_wait;                      ///<wait x generations after colony goes stagnant before restarting
     bool colorful;                          ///<use colors or b/w
     Color stable;
     Color growth;
@@ -54,6 +56,7 @@ Config config = {
     .density = 30,
     .show_stats = false,
     .auto_restart = true,
+    .stagnant_wait = 100,
     .colorful = true,
     .stable = {86, 252, 3},
     .growth = {3, 252, 219},
@@ -63,11 +66,13 @@ Config config = {
 
 bool matrix[COLS][ROWS];
 bool matrix_next[COLS][ROWS];
+
 bool history[HISTORY_SIZE][COLS][ROWS];
 int history_index = 0;                  ///<generations in history, for comparison to check for oscillation
+
 int generation_index = 0;               ///<generation number
 int restart_index = 0;                  ///<colony number
-
+int stagnant_index = 0;                 ///<number of generations colony has been stagnant
 
 /**
  * @brief parse r,g,b string into Color
@@ -118,7 +123,7 @@ void parse_config_file(Config* config) {
                 config->simulation_speed = 100;
             }
         }
-        else if (strcmp(key, "density") == 0) {
+        else if (strcmp(key, "starting_density") == 0) {
             config->density = atoi(value);
             if (config->density < 1 || config->density > 100) {
                 error = true;
@@ -134,6 +139,22 @@ void parse_config_file(Config* config) {
                 config->show_stats = (strcmp(value, "true") == 0) ? true : false;
             }
         }
+        else if (strcmp(key, "auto_restart") == 0) {
+            if (strlen(value) < 1) {
+                error = true;
+                config->auto_restart = true;
+            }
+            else {
+                config->auto_restart = (strcmp(value, "true") == 0) ? true : false;
+            }
+        }
+        if (strcmp(key, "stagnant_wait") == 0) {
+            config->stagnant_wait = atoi(value);
+            if (config->stagnant_wait < 0 || config->simulation_speed > 1000) {
+                error = true;
+                config->stagnant_wait = 100;
+            }
+        }
         else if (strcmp(key, "colorful") == 0) {
             if (strlen(value) < 1) {
                 error = true;
@@ -143,7 +164,7 @@ void parse_config_file(Config* config) {
                 config->colorful = (strcmp(value, "true") == 0) ? true : false;
             }
         }
-        else if (strcmp(key, "stable") == 0) {
+        else if (strcmp(key, "stable_color") == 0) {
             if (strlen(value) < 1) {
                 error = true;
             }
@@ -153,7 +174,7 @@ void parse_config_file(Config* config) {
                 }
             }
         }
-        else if (strcmp(key, "growth") == 0) {
+        else if (strcmp(key, "growth_color") == 0) {
             if (strlen(value) < 1) {
                 error = true;
             }
@@ -163,7 +184,7 @@ void parse_config_file(Config* config) {
                 }
             }
         }
-        else if (strcmp(key, "dense") == 0) {
+        else if (strcmp(key, "dense_color") == 0) {
             if (strlen(value) < 1) {
                 error = true;
             }
@@ -173,7 +194,7 @@ void parse_config_file(Config* config) {
                 }
             }
         }
-        else if (strcmp(key, "sparce") == 0) {
+        else if (strcmp(key, "sparce_color") == 0) {
             if (strlen(value) < 1) {
                 error = true;
             }
@@ -269,6 +290,7 @@ void restart_simulation() {
     memset(history, 0, sizeof(history));
     history_index = 0;
     generation_index = 0;
+    stagnant_index = 0;
     restart_index++;
 }
 
@@ -381,12 +403,12 @@ int main(int argc, char** argv)
         generation_index++;
 
         if (config.auto_restart) {
-            // check for oscillating/static state
-            bool oscillating = false;
-            for (int h = 0; h < HISTORY_SIZE; h++) {
+            // check for static state
+            bool oscillating = true;
+            for (int h = 0; h < HISTORY_SIZE; h++) { 
                 if (h == history_index) continue;
                 if (memcmp(matrix, history[h], sizeof(matrix)) == 0) {
-                    oscillating = true;
+                    oscillating = false;
                     break;
                 }
             }
@@ -396,9 +418,14 @@ int main(int argc, char** argv)
             history_index = (history_index + 1) % HISTORY_SIZE;
 
             //if nothing fun is happening restart
-            if (oscillating) {
-                restart_simulation();
-
+            if (!oscillating) {
+                stagnant_index++;
+                if (stagnant_index >= config.stagnant_wait) {
+                    restart_simulation();
+                }
+            }
+            else {
+                stagnant_index = 0;
             }
         }
 
