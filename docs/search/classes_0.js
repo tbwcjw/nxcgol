@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['color_0',['Color',['../struct_color.html',1,'']]],
-  ['config_1',['Config',['../struct_config.html',1,'']]]
+  ['color_0',['Color',['../structColor.html',1,'']]],
+  ['config_1',['Config',['../structConfig.html',1,'']]]
 ];
